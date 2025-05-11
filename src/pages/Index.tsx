@@ -7,6 +7,7 @@ import AIPrompt from '@/components/AIPrompt';
 import { toast } from "@/components/ui/use-toast";
 import { Separator } from "@/components/ui/separator";
 import { saveAs } from 'file-saver';
+import { Github, Linkedin } from 'lucide-react';
 
 const DEFAULT_DIAGRAM = `graph TD
     A[Start] --> B{Decision}
@@ -185,10 +186,16 @@ const Index = () => {
         </div>
         
         <div className="glass-panel p-4 text-center text-sm text-slate-500 dark:text-slate-400 animate-slide-in" style={{ animationDelay: '200ms' }}>
-          <p>
-            Create beautiful diagrams with Mermaid syntax and AI assistance. 
-            Made with precision and care.
-          </p>
+          <div className="flex items-center justify-center space-x-4 mt-2">
+            <a href="https://github.com/jeevanba273" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors duration-300">
+              <span className="sr-only">GitHub</span>
+              <Github className="h-8 w-8" />
+            </a>
+            <a href="https://www.linkedin.com/in/jeevanba273/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors duration-300">
+              <span className="sr-only">LinkedIn</span>
+              <Linkedin className="h-8 w-8" />
+            </a>
+          </div>
         </div>
       </main>
     </div>

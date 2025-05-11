@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Editor from '@/components/Editor';
@@ -186,6 +185,7 @@ const Index = () => {
         </div>
         
         <div className="glass-panel p-4 text-center text-sm text-slate-500 dark:text-slate-400 animate-slide-in" style={{ animationDelay: '200ms' }}>
+          <p className="mb-2">Create beautiful diagrams with Mermaid syntax and AI assistance.</p>
           <div className="flex items-center justify-center space-x-4 mt-2">
             <a href="https://github.com/jeevanba273" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors duration-300">
               <span className="sr-only">GitHub</span>

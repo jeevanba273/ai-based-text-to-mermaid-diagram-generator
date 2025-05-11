@@ -12,7 +12,7 @@
   </p>
 </div>
 
-![Screenshot of Mermaid Diagram Creator](/public/Screenshot.png)
+![Screenshot of Mermaid Diagram Creator](/public/Screenshot.png) 
 
 ## 🚀 Live Demo
 

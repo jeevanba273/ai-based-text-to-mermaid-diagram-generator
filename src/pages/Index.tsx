@@ -80,65 +80,65 @@ const Index = () => {
           description: `Saved as ${filename}`,
         });
       } else {
-        // For bitmap formats (PNG, JPG, JPEG), convert SVG to canvas
+        // For bitmap formats, we need to use a different approach to avoid tainted canvas issues
+        
+        // Get SVG data and create a Blob
         const svgData = new XMLSerializer().serializeToString(svgElement);
-        
-        // Create a data URL for the SVG
         const svgBlob = new Blob([svgData], {type: 'image/svg+xml'});
-        const url = URL.createObjectURL(svgBlob);
         
-        // Create an Image object to render the SVG
-        const img = new Image();
-        
-        img.onload = () => {
-          // Create a canvas with the same dimensions as the SVG
-          const canvas = document.createElement('canvas');
-          const svgRect = svgElement.getBoundingClientRect();
-          canvas.width = svgRect.width * 2; // 2x for better resolution
-          canvas.height = svgRect.height * 2;
+        // Convert SVG to a data URL
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const dataUrl = e.target?.result as string;
           
-          const ctx = canvas.getContext('2d');
-          if (!ctx) {
-            throw new Error("Could not get canvas context");
-          }
+          // Create an image from the data URL
+          const img = new Image();
+          img.onload = function() {
+            // Create a canvas to draw the image
+            const canvas = document.createElement('canvas');
+            const svgRect = svgElement.getBoundingClientRect();
+            canvas.width = svgRect.width * 2; // 2x for better resolution
+            canvas.height = svgRect.height * 2;
+            
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+              throw new Error("Could not get canvas context");
+            }
+            
+            // For JPG/JPEG, fill with white background (SVG default is transparent)
+            if (format === 'jpg' || format === 'jpeg') {
+              ctx.fillStyle = 'white';
+              ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+            
+            // Draw the image on the canvas
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            
+            // Get the canvas data URL and convert to Blob
+            const dataURL = canvas.toDataURL(`image/${format}`, 0.95);
+            
+            // Convert data URL to Blob
+            const binaryString = atob(dataURL.split(',')[1]);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            
+            for (let i = 0; i < len; i++) {
+              bytes[i] = binaryString.charCodeAt(i);
+            }
+            
+            const imageBlob = new Blob([bytes], {type: `image/${format}`});
+            saveAs(imageBlob, filename);
+            
+            toast({
+              title: "Export successful",
+              description: `Saved as ${filename}`,
+            });
+          };
           
-          // For JPG/JPEG, fill with white background (SVG default is transparent)
-          if (format === 'jpg' || format === 'jpeg') {
-            ctx.fillStyle = 'white';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-          }
-          
-          // Draw the image on the canvas
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          
-          // Convert canvas to data URL and then to Blob for download
-          canvas.toBlob(
-            (blob) => {
-              if (blob) {
-                saveAs(blob, filename);
-                toast({
-                  title: "Export successful",
-                  description: `Saved as ${filename}`,
-                });
-              } else {
-                toast({
-                  title: "Export failed",
-                  description: `Failed to convert to ${format.toUpperCase()}`,
-                  variant: "destructive",
-                });
-              }
-            },
-            `image/${format}`,
-            0.95 // Quality for JPEG
-          );
-          
-          // Clean up
-          URL.revokeObjectURL(url);
+          img.src = dataUrl;
         };
         
-        // Set crossOrigin to anonymous to prevent tainted canvas errors
-        img.crossOrigin = "anonymous";
-        img.src = url;
+        reader.readAsDataURL(svgBlob);
       }
     } catch (error) {
       console.error('Export error:', error);

@@ -1,11 +1,14 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Download, Github, Moon, Sun } from "lucide-react";
+
 interface HeaderProps {
   onExport: () => void;
   toggleTheme: () => void;
   isDarkMode: boolean;
 }
+
 const Header: React.FC<HeaderProps> = ({
   onExport,
   toggleTheme,
@@ -14,7 +17,13 @@ const Header: React.FC<HeaderProps> = ({
   return <header className="w-full py-4 px-6 border-b border-slate-200/80 dark:border-slate-800/80 backdrop-blur-sm bg-white/50 dark:bg-black/30 animate-fade-in">
       <div className="container max-w-full flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <div className="h-8 w-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center font-semibold">M</div>
+          <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center overflow-hidden">
+            <img 
+              src="/logo.svg" 
+              alt="AI Diagram Creator Logo" 
+              className="h-full w-full object-cover"
+            />
+          </div>
           <h1 className="text-xl font-medium">AI Diagram creator</h1>
           <div className="flex items-center gap-2">
             <div className="text-xs px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Beta</div>
@@ -37,4 +46,5 @@ const Header: React.FC<HeaderProps> = ({
       </div>
     </header>;
 };
+
 export default Header;

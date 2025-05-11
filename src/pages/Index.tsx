@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Editor from '@/components/Editor';
@@ -79,35 +80,40 @@ const Index = () => {
           description: `Saved as ${filename}`,
         });
       } else {
-        // For bitmap formats (PNG, JPG, JPEG), we need to convert SVG to canvas first
+        // For bitmap formats (PNG, JPG, JPEG), convert SVG to canvas
         const svgData = new XMLSerializer().serializeToString(svgElement);
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
         
-        // Set dimensions based on SVG viewBox or size
-        const svgRect = svgElement.getBoundingClientRect();
-        canvas.width = svgRect.width * 2; // 2x for better resolution
-        canvas.height = svgRect.height * 2;
+        // Create a data URL for the SVG
+        const svgBlob = new Blob([svgData], {type: 'image/svg+xml'});
+        const url = URL.createObjectURL(svgBlob);
         
-        if (ctx) {
+        // Create an Image object to render the SVG
+        const img = new Image();
+        
+        img.onload = () => {
+          // Create a canvas with the same dimensions as the SVG
+          const canvas = document.createElement('canvas');
+          const svgRect = svgElement.getBoundingClientRect();
+          canvas.width = svgRect.width * 2; // 2x for better resolution
+          canvas.height = svgRect.height * 2;
+          
+          const ctx = canvas.getContext('2d');
+          if (!ctx) {
+            throw new Error("Could not get canvas context");
+          }
+          
           // For JPG/JPEG, fill with white background (SVG default is transparent)
           if (format === 'jpg' || format === 'jpeg') {
             ctx.fillStyle = 'white';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
           }
           
-          // Create image from SVG
-          const img = new Image();
-          const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
-          const url = URL.createObjectURL(svgBlob);
+          // Draw the image on the canvas
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
           
-          img.onload = () => {
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            URL.revokeObjectURL(url);
-            
-            // Convert canvas to the requested format
-            const mimeType = `image/${format}`;
-            canvas.toBlob((blob) => {
+          // Convert canvas to data URL and then to Blob for download
+          canvas.toBlob(
+            (blob) => {
               if (blob) {
                 saveAs(blob, filename);
                 toast({
@@ -121,13 +127,18 @@ const Index = () => {
                   variant: "destructive",
                 });
               }
-            }, mimeType, 0.95); // 0.95 quality for JPEG
-          };
+            },
+            `image/${format}`,
+            0.95 // Quality for JPEG
+          );
           
-          img.src = url;
-        } else {
-          throw new Error("Could not get canvas context");
-        }
+          // Clean up
+          URL.revokeObjectURL(url);
+        };
+        
+        // Set crossOrigin to anonymous to prevent tainted canvas errors
+        img.crossOrigin = "anonymous";
+        img.src = url;
       }
     } catch (error) {
       console.error('Export error:', error);

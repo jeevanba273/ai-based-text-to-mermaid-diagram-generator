@@ -41,7 +41,14 @@ const Preview: React.FC<PreviewProps> = ({ code, className }) => {
         await new Promise(resolve => setTimeout(resolve, 300));
         
         const { svg } = await mermaid.render('mermaid-diagram', code);
-        setSvg(svg);
+        
+        // Process the SVG to make it exportable
+        const processedSvg = svg.replace(
+          '<svg ',
+          '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+        );
+        
+        setSvg(processedSvg);
       } catch (err) {
         console.error('Mermaid rendering error:', err);
         setError(err instanceof Error ? err.message : 'Failed to render diagram');

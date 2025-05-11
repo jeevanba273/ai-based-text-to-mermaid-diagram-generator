@@ -12,7 +12,7 @@
   </p>
 </div>
 
-![Screenshot of Mermaid Diagram Creator](https://drive.google.com/file/d/1ET_QZXjvImZHNoWv_X0OJNySSl4K-jk8/view?usp=sharing)
+![Screenshot of Mermaid Diagram Creator](/Public/Screenshot.png)
 
 ## 🚀 Live Demo
 

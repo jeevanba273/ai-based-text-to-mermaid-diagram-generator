@@ -16,8 +16,8 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   return <header className="w-full py-4 px-6 border-b border-slate-200/80 dark:border-slate-800/80 backdrop-blur-sm bg-white/50 dark:bg-black/30 animate-fade-in">
       <div className="container max-w-full flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <div className="h-8 w-8 rounded-lg bg-black flex items-center justify-center overflow-hidden">
+        <div className="flex items-center space-x-4">
+          <div className="h-10 w-10 rounded-lg bg-black flex items-center justify-center overflow-hidden ml-[-8px]">
             <img 
               src="/lovable-uploads/9623232f-0e6e-4eee-98d7-5719878bf959.png" 
               alt="Mermaid Diagram Creator Logo" 

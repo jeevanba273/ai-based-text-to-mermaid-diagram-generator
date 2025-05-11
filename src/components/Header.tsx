@@ -19,7 +19,7 @@ const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center space-x-3">
           <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center overflow-hidden">
             <img 
-              src="/logo.svg" 
+              src="/lovable-uploads/9623232f-0e6e-4eee-98d7-5719878bf959.png" 
               alt="Mermaid Diagram Creator Logo" 
               className="h-full w-full object-cover"
             />

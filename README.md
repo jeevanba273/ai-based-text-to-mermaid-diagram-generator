@@ -6,17 +6,17 @@
   <p>
     <a href="https://text-to-mermaid-diagram-generator.up.railway.app/">View Demo</a>
     ·
-    <a href="https://github.com/username/mermaid-diagram-creator/issues">Report Bug</a>
+    <a href="https://github.com/jeevanba273/ai-based-text-to-mermaid-diagram-generator/issues">Report Bug</a>
     ·
-    <a href="https://github.com/username/mermaid-diagram-creator/issues">Request Feature</a>
+    <a href="https://github.com/jeevanba273/ai-based-text-to-mermaid-diagram-generator/issues">Request Feature</a>
   </p>
 </div>
 
-![Screenshot of Mermaid Diagram Creator](https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=1200&h=630&q=80)
+![Screenshot of Mermaid Diagram Creator](https://drive.google.com/file/d/1ET_QZXjvImZHNoWv_X0OJNySSl4K-jk8/view?usp=sharing)
 
 ## 🚀 Live Demo
 
-Check out the live application at [https://text-to-mermaid-diagram-generator.up.railway.app/](https://text-to-mermaid-diagram-generator.up.railway.app/)
+Check out the live application at [**Mermaid Diagram Generator App**](https://text-to-mermaid-diagram-generator.up.railway.app/)
 
 ## ✨ Features
 
@@ -157,17 +157,7 @@ The application is deployed on [Railway.app](https://railway.app/), a modern clo
 - Save diagrams to your account
 - Share diagrams with others
 - More diagram types and templates
-- Additional AI models for diagram generation
 
-## 📝 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-## 📧 Contact
-
-Your Name - [@your_twitter](https://twitter.com/your_twitter) - email@example.com
-
-Project Link: [https://github.com/username/mermaid-diagram-creator](https://github.com/username/mermaid-diagram-creator)
 
 ---
 

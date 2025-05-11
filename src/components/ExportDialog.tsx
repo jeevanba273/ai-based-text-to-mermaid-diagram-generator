@@ -2,7 +2,7 @@
 import React from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { FileImage, FileSvg, Download } from 'lucide-react';
+import { FileImage, File, Download } from 'lucide-react';
 
 interface ExportDialogProps {
   open: boolean;
@@ -27,7 +27,7 @@ const ExportDialog: React.FC<ExportDialogProps> = ({
             className="flex flex-col h-auto py-4 gap-2"
             onClick={() => onExportFormat('svg')}
           >
-            <FileSvg className="h-8 w-8 text-blue-500" />
+            <File className="h-8 w-8 text-blue-500" />
             <span>SVG Format</span>
             <span className="text-xs text-muted-foreground">Vector graphics</span>
           </Button>

@@ -1,69 +1,176 @@
-# Welcome to your Lovable project
 
-## Project info
+<div align="center">
+  <img src="/public/lovable-uploads/9623232f-0e6e-4eee-98d7-5719878bf959.png" alt="Mermaid Diagram Creator Logo" width="150" height="150" style="border-radius: 20px"/>
+  <h1>Mermaid Diagram Creator</h1>
+  <p><strong>Create beautiful diagrams using text and AI - instantly visualized</strong></p>
+  <p>
+    <a href="https://text-to-mermaid-diagram-generator.up.railway.app/">View Demo</a>
+    ·
+    <a href="https://github.com/username/mermaid-diagram-creator/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/username/mermaid-diagram-creator/issues">Request Feature</a>
+  </p>
+</div>
 
-**URL**: https://lovable.dev/projects/e751f4c0-8ecf-4b68-92d9-99805a66e66e
+![Screenshot of Mermaid Diagram Creator](https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=1200&h=630&q=80)
 
-## How can I edit this code?
+## 🚀 Live Demo
 
-There are several ways of editing your application.
+Check out the live application at [https://text-to-mermaid-diagram-generator.up.railway.app/](https://text-to-mermaid-diagram-generator.up.railway.app/)
 
-**Use Lovable**
+## ✨ Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/e751f4c0-8ecf-4b68-92d9-99805a66e66e) and start prompting.
+- **Real-time Preview** - See your diagrams come to life as you type
+- **AI-Powered Generation** - Create diagrams using natural language with GPT-4o-mini
+- **Multiple Export Options** - Save your diagrams as SVG, PNG, JPG, or JPEG
+- **Dark/Light Mode** - Work comfortably in any lighting condition
+- **Responsive Design** - Works on desktop and mobile devices
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🧠 How It Works
 
-**Use your preferred IDE**
+Mermaid Diagram Creator converts text in the [Mermaid syntax](https://mermaid.js.org/intro/) into visual diagrams in real-time. You can either:
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+1. **Write directly in Mermaid syntax** - If you're familiar with the syntax, write your diagram code directly
+2. **Use AI to generate diagrams** - Describe what you want in natural language, and the AI will create the diagram for you
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Mermaid Syntax Examples
 
-Follow these steps:
+<details>
+<summary>Flow Chart</summary>
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```mermaid
+graph TD
+    A[Start] --> B{Decision}
+    B -->|Yes| C[Action]
+    B -->|No| D[Alternative Action]
+    C --> E[Result]
+    D --> E
 ```
+</details>
 
-**Edit a file directly in GitHub**
+<details>
+<summary>Sequence Diagram</summary>
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```mermaid
+sequenceDiagram
+    participant User
+    participant System
+    participant Database
+    
+    User->>System: Request data
+    System->>Database: Query data
+    Database-->>System: Return results
+    System-->>User: Display results
+```
+</details>
 
-**Use GitHub Codespaces**
+<details>
+<summary>Class Diagram</summary>
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```mermaid
+classDiagram
+    class Animal {
+        +name: string
+        +age: int
+        +makeSound(): void
+    }
+    class Dog {
+        +breed: string
+        +fetch(): void
+    }
+    class Cat {
+        +color: string
+        +climb(): void
+    }
+    Animal <|-- Dog
+    Animal <|-- Cat
+```
+</details>
 
-## What technologies are used for this project?
+## 🛠️ Using the Application
 
-This project is built with .
+### Creating a Diagram
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+1. **Code Editor Method**:
+   - Select the "Mermaid Code" tab
+   - Type or paste your Mermaid syntax
+   - See the preview update in real-time
 
-## How can I deploy this project?
+2. **AI Generation Method**:
+   - Select the "AI Prompt" tab
+   - Type a description of the diagram you want to create
+   - Click "Generate" (requires OpenAI API key)
+   - Watch as the AI creates the diagram for you
 
-Simply open [Lovable](https://lovable.dev/projects/e751f4c0-8ecf-4b68-92d9-99805a66e66e) and click on Share -> Publish.
+### Setting Up Your OpenAI API Key
 
-## I want to use a custom domain - is that possible?
+1. Click the gear icon next to the "Generate" button
+2. Enter your OpenAI API key
+3. Your API key is stored locally in your browser and is never sent to our servers
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+### Exporting Your Diagram
+
+1. Click the "Export" button in the top right corner
+2. Select your preferred format:
+   - SVG (vector graphics, best for quality)
+   - PNG (transparent background)
+   - JPG/JPEG (with white background)
+3. The diagram will download automatically
+
+### Toggling Light/Dark Mode
+
+- Click the sun/moon icon in the top right corner to switch between light and dark modes
+
+## 💻 Technical Details
+
+### Built With
+
+- [React](https://reactjs.org/) - UI Framework
+- [TypeScript](https://www.typescriptlang.org/) - Type Safety
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [shadcn/ui](https://ui.shadcn.com/) - UI Components
+- [Mermaid.js](https://mermaid.js.org/) - Diagram Rendering Engine
+- [OpenAI API](https://openai.com/api/) - AI Diagram Generation
+- [Vite](https://vitejs.dev/) - Build Tool
+
+### Architecture
+
+The application consists of several key components:
+
+- **Editor Component**: Provides tabs for both Mermaid code and AI prompt inputs
+- **Preview Component**: Renders the Mermaid syntax into visual diagrams
+- **AIPrompt Component**: Handles interaction with the OpenAI API
+- **Export Functionality**: Converts diagrams to various image formats
+
+## 🔒 Privacy & Security
+
+- Your diagrams and code stay in your browser
+- OpenAI API keys are stored only in your local browser storage
+- No data is sent to our servers except when using the AI generation feature
+
+## 🚀 Deployment
+
+The application is deployed on [Railway.app](https://railway.app/), a modern cloud platform that makes it easy to deploy web applications.
+
+## 🔍 Future Enhancements
+
+- Save diagrams to your account
+- Share diagrams with others
+- More diagram types and templates
+- Additional AI models for diagram generation
+
+## 📝 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## 📧 Contact
+
+Your Name - [@your_twitter](https://twitter.com/your_twitter) - email@example.com
+
+Project Link: [https://github.com/username/mermaid-diagram-creator](https://github.com/username/mermaid-diagram-creator)
+
+---
+
+<div align="center">
+  <sub>Built with ❤️ using React, TypeScript, and the power of AI</sub>
+</div>

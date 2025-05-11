@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Editor from '@/components/Editor';
@@ -43,7 +42,7 @@ const Index = () => {
     setTimeout(() => setCode(currentCode), 10);
   };
 
-  const handleExport = () => {
+  const handleExport = (format: 'svg' | 'png' | 'jpg' | 'jpeg') => {
     try {
       const svgElement = document.querySelector('.diagram-container svg');
       if (!svgElement) {
@@ -55,12 +54,8 @@ const Index = () => {
         return;
       }
       
-      // Get SVG content
-      const svgData = new XMLSerializer().serializeToString(svgElement);
-      const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
-      
       // Generate filename from first line of diagram or use default
-      let filename = 'mermaid-diagram.svg';
+      let filename = `mermaid-diagram.${format}`;
       const firstLine = code.split('\n')[0];
       if (firstLine) {
         const cleanName = firstLine
@@ -69,16 +64,71 @@ const Index = () => {
           .replace(/\s+/g, '-')
           .toLowerCase();
         if (cleanName) {
-          filename = `${cleanName}.svg`;
+          filename = `${cleanName}.${format}`;
         }
       }
       
-      saveAs(svgBlob, filename);
-      
-      toast({
-        title: "Export successful",
-        description: `Saved as ${filename}`,
-      });
+      if (format === 'svg') {
+        // Direct SVG export
+        const svgData = new XMLSerializer().serializeToString(svgElement);
+        const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+        saveAs(svgBlob, filename);
+        
+        toast({
+          title: "Export successful",
+          description: `Saved as ${filename}`,
+        });
+      } else {
+        // For bitmap formats (PNG, JPG, JPEG), we need to convert SVG to canvas first
+        const svgData = new XMLSerializer().serializeToString(svgElement);
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Set dimensions based on SVG viewBox or size
+        const svgRect = svgElement.getBoundingClientRect();
+        canvas.width = svgRect.width * 2; // 2x for better resolution
+        canvas.height = svgRect.height * 2;
+        
+        if (ctx) {
+          // For JPG/JPEG, fill with white background (SVG default is transparent)
+          if (format === 'jpg' || format === 'jpeg') {
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+          }
+          
+          // Create image from SVG
+          const img = new Image();
+          const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+          const url = URL.createObjectURL(svgBlob);
+          
+          img.onload = () => {
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            URL.revokeObjectURL(url);
+            
+            // Convert canvas to the requested format
+            const mimeType = `image/${format}`;
+            canvas.toBlob((blob) => {
+              if (blob) {
+                saveAs(blob, filename);
+                toast({
+                  title: "Export successful",
+                  description: `Saved as ${filename}`,
+                });
+              } else {
+                toast({
+                  title: "Export failed",
+                  description: `Failed to convert to ${format.toUpperCase()}`,
+                  variant: "destructive",
+                });
+              }
+            }, mimeType, 0.95); // 0.95 quality for JPEG
+          };
+          
+          img.src = url;
+        } else {
+          throw new Error("Could not get canvas context");
+        }
+      }
     } catch (error) {
       console.error('Export error:', error);
       toast({

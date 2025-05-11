@@ -1,10 +1,11 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Download, Github, Moon, Sun } from "lucide-react";
+import ExportDialog from './ExportDialog';
 
 interface HeaderProps {
-  onExport: () => void;
+  onExport: (format: 'svg' | 'png' | 'jpg' | 'jpeg') => void;
   toggleTheme: () => void;
   isDarkMode: boolean;
 }
@@ -14,6 +15,8 @@ const Header: React.FC<HeaderProps> = ({
   toggleTheme,
   isDarkMode
 }) => {
+  const [exportDialogOpen, setExportDialogOpen] = useState(false);
+  
   return <header className="w-full py-4 px-6 border-b border-slate-200/80 dark:border-slate-800/80 backdrop-blur-sm bg-white/50 dark:bg-black/30 animate-fade-in">
       <div className="container max-w-full flex items-center justify-between">
         <div className="flex items-center space-x-4">
@@ -34,13 +37,24 @@ const Header: React.FC<HeaderProps> = ({
           <Button variant="outline" size="sm" className="glass-button" onClick={toggleTheme}>
             {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
           </Button>
-          <Button variant="outline" size="sm" className="glass-button" onClick={onExport}>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="glass-button" 
+            onClick={() => setExportDialogOpen(true)}
+          >
             <Download size={16} className="mr-2" />
             Export
           </Button>
           <Button variant="outline" size="sm" className="glass-button" asChild>
             
           </Button>
+
+          <ExportDialog 
+            open={exportDialogOpen}
+            onOpenChange={setExportDialogOpen}
+            onExportFormat={onExport}
+          />
         </div>
       </div>
     </header>;

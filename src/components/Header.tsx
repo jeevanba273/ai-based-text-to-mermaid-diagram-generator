@@ -23,11 +23,11 @@ const Header: React.FC<HeaderProps> = ({
           <div className="h-10 w-10 rounded-lg bg-black flex items-center justify-center overflow-hidden ml-[-8px]">
             <img 
               src="/lovable-uploads/9623232f-0e6e-4eee-98d7-5719878bf959.png" 
-              alt="Mermaid Diagram Creator Logo" 
+              alt="Mermaid Diagram Generator Logo" 
               className="h-full w-full object-cover"
             />
           </div>
-          <h1 className="text-xl font-medium">Mermaid Diagram Creator</h1>
+          <h1 className="text-xl font-medium">Mermaid Diagram Generator</h1>
           <div className="flex items-center gap-2">
             <div className="text-xs px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">AI Powered</div>
           </div>

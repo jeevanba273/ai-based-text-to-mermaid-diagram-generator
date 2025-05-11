@@ -26,7 +26,6 @@ const Header: React.FC<HeaderProps> = ({
           </div>
           <h1 className="text-xl font-medium">AI Diagram creator</h1>
           <div className="flex items-center gap-2">
-            <div className="text-xs px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Beta</div>
             <div className="text-xs px-2 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">API Powered</div>
           </div>
         </div>
